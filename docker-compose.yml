@@ -1,0 +1,18 @@
+version: '3'
+services:
+  webserver:
+    image: puckel/docker-airflow
+    ports:
+     - "8080:8080"
+    command: webserver
+    healthcheck:
+            test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+            interval: 30s
+            timeout: 30s
+            retries: 3
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: tutorial
+        awslogs-region: us-west-1
+        awslogs-stream-prefix: airflow 
