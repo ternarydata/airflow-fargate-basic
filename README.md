@@ -108,8 +108,7 @@ security group from the console while you wait for the down command to
 complete;
 your delete request will succeed once CloudFormation deletes the network
 interface. Go back to the terminal and wait for
-CloudFormation to finish deleting resources. (You can also monitor cloud
-formation through the console.)
+CloudFormation to finish deleting resources. (You can also monitor CloudFormation through the console.)
 
 ## Next steps
 
