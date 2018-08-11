@@ -30,18 +30,25 @@ Work through the prerequisites and Step 1 of the [tutorial](https://docs.aws.ama
 to install the ECS CLI and create a task execution role. (Note that
 `task-execution-assume-role.json`
 is included in this repo.)
-Next, we configure an ECS Fargate cluster
+Next, we configure an ECS Fargate cluster.
 ```
 ecs-cli configure --cluster airflow --region us-west-1 --default-launch-type FARGATE --config-name airflow
 ```
-and store credentials.
+For security, we handle things a little differently than the ECS tutorial. Instead of passing credentials at the command
+line, we'll use placeholders for the key id and secret key.
 ```
-ecs-cli configure profile --access-key AWS_ACCESS_KEY_ID --secret-key AWS_SECRET_ACCESS_KEY --profile-name airflow
+ecs-cli configure profile --access-key None --secret-key None --profile-name airflow
 ```
-Note that the CLI has no facilities for viewing
-the configuration you've stored. You can view and directly edit
-the config by looking at the
-text files in `~/.ecs/`.
+Now, open `~/.ecs/credentials`.
+```
+version: v1
+default: airflow
+ecs_profiles:
+  airflow:
+    aws_access_key_id: None
+    aws_secret_access_key: None
+```
+Fill in the key information and save.
 
 ## Start the cluster
 
